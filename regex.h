@@ -1,7 +1,7 @@
+#include <stdbool.h>
+
 #ifndef REGEX_H
 #define REGEX_H
-
-#include <stdbool.h>
 
 /*
 function declarations + build system
