@@ -4,3 +4,8 @@ hallo again
 This is the end
 The quick brown fox
 The end
+abc
+abbc
+ac
+a
+empty
