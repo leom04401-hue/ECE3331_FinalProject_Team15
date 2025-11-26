@@ -9,3 +9,6 @@ abbc
 ac
 a
 empty
+color
+colour
+h.llo test line

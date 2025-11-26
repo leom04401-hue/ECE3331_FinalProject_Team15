@@ -6,14 +6,22 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11
-
 TARGET = regex-lite
 OBJS = main.o regex.o search.o
+.PHONY: all clean run
 
 all: $(TARGET)
 
+# Link Final Executable
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Compile .c files into .o files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+run: $(TARGET)
+./$(TARGET) $(FILE) $(PATTERN)
 
 clean:
 	rm -f $(OBJS) $(TARGET)

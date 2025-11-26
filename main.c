@@ -2,7 +2,7 @@
 #include <stdlib.h>     // Standard library (exit codes, general utilities)
 #include "regex.h"      // Our custom header containing search_file() and match() prototypes
 
-/* IVAN IS THE GOAT
+/*
 argument handling   
 Entry point of the program. Handles command-line arguments
 and calls search_file() to perform regex-like pattern matching

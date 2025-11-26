@@ -9,8 +9,10 @@ It supports:
 ^      - anchor at beginning of line
 $      - anchor at end of line
 *      - zero or more repetitions of previous character
++      - one or more repetitions of previous character
 ?      - optional previous character (zero or one)
 [abc]  - simple character sets (no ranges)
+.      - wildcard that matches any single character
 
 Functions:
 match()      - entry point (public)
@@ -74,6 +76,16 @@ bool match_here(const char *pattern, const char *text) {
         return match_star(pattern[0], pattern + 2, text);
     }
 
+    // Look ahead for "+" (one or more of previous char)
+    if (pattern[1] == '+') {
+        // Must match at least one occurrence of pattern[0]
+        if (*text == '\0' || *text != pattern[0]) {
+            return false;
+        }
+        // Consume one, then reuse match_star() for the remaining "c*"
+        return match_star(pattern[0], pattern + 2, text + 1);
+    }
+
     // Look ahead for "?" (zero or one of previous char)
     if (pattern[1] == '?') {
         // If current character matches, we can consume it
@@ -85,9 +97,11 @@ bool match_here(const char *pattern, const char *text) {
         return match_here(pattern + 2, text);
     }
 
-    // Plain character-by-character match
-    if (*text != '\0' && *pattern == *text)   // if current chars match
+    // Plain character match or '.' wildcard
+    // '.' matches any single non-null character
+    if (*text != '\0' && (*pattern == *text || *pattern == '.')) {
         return match_here(pattern + 1, text + 1); // continue recursively
+    }
 
     // No match at this step
     return false;                             

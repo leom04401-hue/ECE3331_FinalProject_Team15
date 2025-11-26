@@ -1,0 +1,69 @@
+Test 1: Basic substring match: "The"
+Command:
+    ./regex-lite test_cases.txt "The"
+Output:
+    5: The quick brown fox
+    6: The end
+
+Test 2: Beginning anchor: "^The"
+Command:
+    ./regex-lite test_cases.txt "^The"
+Output:
+    5: The quick brown fox
+    6: The end
+
+Test 3: Ending anchor: "end$"
+Command:
+    ./regex-lite test_cases.txt "end$"
+Output:
+    4: This is the end
+    6: The end
+
+Test 4: Character set: "h[ae]llo"
+Command:
+    ./regex-lite test_cases.txt "h[ae]llo"
+Output:
+    2: hello there
+    3: hallo again
+
+Test 5: BONUS dot: "h.llo"
+Command:
+    ./regex-lite test_cases.txt "h.llo"
+Output:
+    2: hello there
+    3: hallo again
+    14: h.llo test line
+
+Test 6: Zero-or-more (*) operator: "ab*c"
+Command:
+    ./regex-lite test_cases.txt "ab*c"
+Output:
+    7: abc
+    8: abbc
+    9: ac
+
+Test 7: BONUS One-or-more (+) operator: "ab+c"
+Command:
+    ./regex-lite test_cases.txt "ab+c"
+Output:
+    7: abc
+    8: abbc
+
+Test 8: Optional (?) operator: "colou?r"
+Command:
+    ./regex-lite test_cases.txt "colou?r"
+Output:
+    12: color
+    13: colour
+
+Test 9: No match case: "xyz123"
+Command:
+    ./regex-lite test_cases.txt "xyz123"
+Output:
+    (no output)
+
+Test 10: Match entire line: "^a$"
+Command:
+    ./regex-lite test_cases.txt "^a$"
+Output:
+    10: a
